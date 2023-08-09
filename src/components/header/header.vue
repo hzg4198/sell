@@ -18,14 +18,44 @@
         </div>
         <!--优惠-->
         <div class="support">
-          <span class="icon"></span>
+          <span class="icon" :class="classMap[seller.supports[0].type]"></span>
           <span class="text">{{seller.supports[0].description}}</span>
         </div>
       </div>
+      <!--5个-->
+      <div class="support-count">
+        <span class="count">{{seller.supports.length+"个"}}</span>
+        <i class="icon-keyboard_arrow_right"></i>
+      </div>
     </div>
     <!--公告-->
-    <div class="bulletin-wrapper"></div>
+    <div class="bulletin-wrapper">
+      <span class="bulletin-title"></span>
+      <span class="bulletin-text">{{seller.bulletin}}</span>
+      <i class="icon-keyboard_arrow_right"></i>
+    </div>
+    <!--头部背景-->
+    <div class="background">
+      <img :src="seller.avatar" width="100%" height="100%">
+    </div>
+<!--详情    -->
+    <div v-show="detailShow" class="detail">
+      <div class="detail-wrapper">
+        <div class="detail-main">
+          <h1 class="name">{{seller.name}}</h1>
+          <div class="star-wrapper">
+            <star :score="seller.score"></star>
+          </div>
+        </div>
+      </div>
+      <div class="detail-close">
+        <i class="icon-close"></i>
+      </div>
+    </div>
+
+
   </div>
+
 </template>
 
 <script>
@@ -34,6 +64,14 @@ export default {
   props:{
     seller:{
       type:Object
+    }
+  },
+  created() {
+    this.classMap=['decrease','discount','special','invoice','guarantee']
+  },
+  data(){
+    return{
+      detailShow:true
     }
   }
 
@@ -44,12 +82,16 @@ export default {
 @import "../../common/stylus/mixin.styl"
 .header
   color #fff
-  background #000
+  background rgba(7,17,27,0.25)
+  position relative
   .content-wrapper
     padding 24px 12px 18px 24px
+    position: relative;
     .avatar
       display inline-block
       vertical-align top
+      img
+        border-radius 5px
     .content
       display inline-block
       margin-left 16px
@@ -72,5 +114,107 @@ export default {
         margin-bottom 10px
         line-height 12px
         font-size 12px
+      .support
+        .icon
+          display inline-block
+          width 12px
+          height 12px
+          margin-right 4px
+          background-size 12px 12px
+          &.decrease
+            bg-image('decrease_1')
+          &.discount
+            bg-image('discount_1')
+          &.special
+            bg-image('special_1')
+          &.invoice
+            bg-image('invoice_1')
+          &.guarantee
+            bg-image('guarantee_1')
+        .text
+          line-height 12px
+          font-size 12px
 
+
+    .support-count
+      position absolute
+      bottom 15px
+      right 12px
+      padding 0 8px
+      height 24px
+      line-height 24px
+      border-radius 14px
+      background rgba(0,0,0,0.2)
+      text-align center
+      .count
+        vertical-align top
+        font-size 10px
+      .icon-keyboard_arrow_right
+        margin-left 2px
+        line-height 24px
+        font-size 10px
+  .bulletin-wrapper
+    height 28px
+    line-height 28px
+    padding 0 22px 0 12px
+    white-space nowrap //强制同一行超出的文本不换行
+    overflow hidden
+    text-overflow ellipsis //多出去的用。。。表示
+    position: relative;
+    background rgba(7,17,27,0.2)
+    .bulletin-title
+      display inline-block
+      vertical-align top
+      margin-top 7px
+      width 22px
+      height 12px
+      bg-image('bulletin')
+      background-size 22px 12px
+
+    .bulletin-text
+      vertical-align top
+      margin 0 4px
+      font-size 10px
+    .icon-keyboard_arrow_right
+      position: absolute;
+      font-size 10px
+      right 12px
+      top 8px
+  .background
+    position: absolute;
+    top 0
+    left 0
+    width 100%
+    height 100%
+    z-index -1
+    filter blur(10px)
+  .detail
+    position: fixed;
+    z-index 100
+    top 0
+    left 0
+    overflow hidden
+    width 100%
+    height 100%
+    background rgba(7,17,27,0.8)
+    .detail-wrapper
+      .detail-main
+        margin-top 64px
+        padding-bottom 64px
+        .name
+          line-height 16px
+          text-align center
+          font-size 16px
+          font-weight 700
+        .star-wrapper
+          margin-left 18px
+          padding 2px
+          text-align center
+          margin-top 30px
+    .detail-close
+        position: relative;
+        width 32px
+        height 32px
+        margin 430px auto 0 auto
+        font-size 32px
 </style>
