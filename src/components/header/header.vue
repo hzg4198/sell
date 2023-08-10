@@ -29,7 +29,8 @@
       </div>
     </div>
     <!--公告-->
-    <div class="bulletin-wrapper">
+    <div class="bulletin-wrapper" @click="detailShow=true">
+
       <span class="bulletin-title"></span>
       <span class="bulletin-text">{{seller.bulletin}}</span>
       <i class="icon-keyboard_arrow_right"></i>
@@ -76,7 +77,7 @@
           </div>
         </div>
       </div>
-      <div class="detail-close">
+      <div class="detail-close" @click="detailShow=false">
         <i class="icon-close"></i>
       </div>
     </div>
@@ -100,7 +101,7 @@ export default {
   },
   data(){
     return{
-      detailShow:true
+      detailShow:false
     }
   },
   components:{star}
