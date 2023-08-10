@@ -1,11 +1,11 @@
 <template>
   <div class="start">
-    <span v-for="item in itemClasses" :class="itemClass" class="star-item"></span>
+    <span v-for="itemClass in itemClasses" :class="itemClass" class="star-item"></span>
   </div>
 </template>
 
 <script>
-import star from "../star/star.vue"
+
 const LENGTH = 5
 const CLS_ON='on';const CLS_HALF='half';const CLS_OFF='off';
 export default {

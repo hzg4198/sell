@@ -47,6 +47,34 @@
             <star :score="seller.score"></star>
           </div>
         </div>
+
+        <div class="detail-disCountDetails">
+          <!--标题-->
+          <div class="disCountDetails-title">
+            <div class="Line"></div>
+            <div class="details-main">优惠信息</div>
+            <div class="Line"></div>
+          </div>
+          <!--内容          -->
+          <div class="disCountDetails-main">
+            <div class="item" v-for="item in seller.supports">
+              <span class="icon" :class="classMap[item.type]"></span>
+              <span class="text">{{item.description}}</span>
+            </div>
+          </div>
+          <!--公告          -->
+          <div class="bulletin">
+            <div class="bulletin-title">
+              <div class="Line"></div>
+              <div class="details-main">商家公告</div>
+              <div class="Line"></div>
+            </div>
+            <div class="bulletin-text">
+              <span class="text">{{seller.bulletin}}</span>
+            </div>
+
+          </div>
+        </div>
       </div>
       <div class="detail-close">
         <i class="icon-close"></i>
@@ -59,6 +87,7 @@
 </template>
 
 <script>
+import star from "../star/star.vue"
 export default {
   name: "header",
   props:{
@@ -73,7 +102,8 @@ export default {
     return{
       detailShow:true
     }
-  }
+  },
+  components:{star}
 
 }
 </script>
@@ -200,7 +230,7 @@ export default {
     .detail-wrapper
       .detail-main
         margin-top 64px
-        padding-bottom 64px
+        padding-bottom 24px
         .name
           line-height 16px
           text-align center
@@ -211,10 +241,82 @@ export default {
           padding 2px
           text-align center
           margin-top 30px
+      .detail-disCountDetails
+        //background-color wheat
+        padding-left 36px
+        padding-right 36px
+        //height 15px
+        .disCountDetails-title
+          text-align center
+          .Line
+            background-color rgba(255,255,255,0.2)
+            height 1px
+            width 32%
+            display inline-block
+
+            position relative
+            margin-bottom 7px
+          .details-main
+            font-size 18px
+            display inline-block
+            padding  0 12px 0 12px
+            font-weight 800
+
+
+        .disCountDetails-main
+          margin-top 24px
+          .item
+            margin-bottom 12px
+            margin-left 12px
+            .icon
+              display inline-block
+              width 16px
+              height 16px
+              margin-right 6px
+              background-size 16px 16px
+              &.decrease
+                bg-image('decrease_1')
+              &.discount
+                bg-image('discount_1')
+              &.special
+                bg-image('special_1')
+              &.invoice
+                bg-image('invoice_1')
+              &.guarantee
+                bg-image('guarantee_1')
+            .text
+              line-height 16px
+              font-size 16px
+              font-weight 200
+        .bulletin
+          margin-top 32px
+          .bulletin-title
+            text-align center
+            .Line
+              background-color rgba(255,255,255,0.2)
+              height 1px
+              width 32%
+              display inline-block
+              position relative
+              margin-bottom 7px
+            .details-main
+              font-size 18px
+              font-weight 800
+              display inline-block
+              padding  0 12px 0 12px
+          .bulletin-text
+            margin 24px 12px auto 24px
+            .text
+              font-size 16px
+              font-weight 200
+              color rgb(255,255,255)
+              line-height 25px
     .detail-close
-        position: relative;
+        position: absolute;
+        bottom 32px
         width 32px
         height 32px
-        margin 430px auto 0 auto
+        margin-left 50%
+        left -16px
         font-size 32px
 </style>
