@@ -227,6 +227,7 @@ export default {
     width 100%
     height 100%
     background rgba(7,17,27,0.8)
+    backdrop-filter blur(3px)
     .detail-wrapper
       .detail-main
         margin-top 64px
@@ -319,4 +320,5 @@ export default {
         margin-left 50%
         left -16px
         font-size 32px
+
 </style>
