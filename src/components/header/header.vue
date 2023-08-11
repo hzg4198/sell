@@ -40,47 +40,50 @@
       <img :src="seller.avatar" width="100%" height="100%">
     </div>
 <!--详情    -->
-    <div v-show="detailShow" class="detail">
-      <div class="detail-wrapper">
-        <div class="detail-main">
-          <h1 class="name">{{seller.name}}</h1>
-          <div class="star-wrapper">
-            <star :score="seller.score"></star>
-          </div>
-        </div>
-
-        <div class="detail-disCountDetails">
-          <!--标题-->
-          <div class="disCountDetails-title">
-            <div class="Line"></div>
-            <div class="details-main">优惠信息</div>
-            <div class="Line"></div>
-          </div>
-          <!--内容          -->
-          <div class="disCountDetails-main">
-            <div class="item" v-for="item in seller.supports">
-              <span class="icon" :class="classMap[item.type]"></span>
-              <span class="text">{{item.description}}</span>
+    <transition name="fade">
+      <div v-show="detailShow" class="detail">
+        <div class="detail-wrapper">
+          <div class="detail-main">
+            <h1 class="name">{{seller.name}}</h1>
+            <div class="star-wrapper">
+              <star :score="seller.score"></star>
             </div>
           </div>
-          <!--公告          -->
-          <div class="bulletin">
-            <div class="bulletin-title">
+
+          <div class="detail-disCountDetails">
+            <!--标题-->
+            <div class="disCountDetails-title">
               <div class="Line"></div>
-              <div class="details-main">商家公告</div>
+              <div class="details-main">优惠信息</div>
               <div class="Line"></div>
             </div>
-            <div class="bulletin-text">
-              <span class="text">{{seller.bulletin}}</span>
+            <!--内容          -->
+            <div class="disCountDetails-main">
+              <div class="item" v-for="item in seller.supports">
+                <span class="icon" :class="classMap[item.type]"></span>
+                <span class="text">{{item.description}}</span>
+              </div>
             </div>
+            <!--公告          -->
+            <div class="bulletin">
+              <div class="bulletin-title">
+                <div class="Line"></div>
+                <div class="details-main">商家公告</div>
+                <div class="Line"></div>
+              </div>
+              <div class="bulletin-text">
+                <span class="text">{{seller.bulletin}}</span>
+              </div>
 
+            </div>
           </div>
         </div>
+        <div class="detail-close" @click="detailShow=false">
+          <i class="icon-close"></i>
+        </div>
       </div>
-      <div class="detail-close" @click="detailShow=false">
-        <i class="icon-close"></i>
-      </div>
-    </div>
+    </transition>
+
 
 
   </div>
@@ -165,8 +168,6 @@ export default {
         .text
           line-height 12px
           font-size 12px
-
-
     .support-count
       position absolute
       bottom 15px
@@ -229,6 +230,12 @@ export default {
     height 100%
     background rgba(7,17,27,0.8)
     backdrop-filter blur(3px)
+    //渐变过后的结果
+    &.fade-enter-active,&.fade-leave-active//渐变进入和退出后的样式的时间
+      transition all 0.5s
+    &.fade-enter,&.fade-leave-to//定义进去和前和退出后的样式，透明无色
+      opacity 0
+      background rgb(7,17,27,0)
     .detail-wrapper
       .detail-main
         margin-top 64px
